@@ -6,6 +6,9 @@ const Constants = require('../utils/constants');
 exports.getAll = (req, res, next) => {
     Article
         .find()
+        .sort({ createdAt: 'desc' })
+        .populate({ path: 'person', select: { firstName: 1, lastName: 1, avatar: 1 } })
+        .populate({ path: 'author', select: { firstName: 1, lastName: 1, avatar: 1 } })
         .then(docs => success(res, docs, docs.length + Constants.RecordsFound))
         .catch(err => error(res, err, Constants.ErrorFinding));
 }
@@ -13,6 +16,8 @@ exports.getAll = (req, res, next) => {
 exports.getByPerson = (req, res, next) => {
     Article
         .find({ person: req.params.id })
+        .sort({ createdAt: 'desc' })
+        .populate({ path: 'author', select: { firstName: 1, lastName: 1, avatar: 1 } })
         .then(docs => success(res, docs, docs.length + Constants.RecordsFound))
         .catch(err => error(res, err, Constants.ErrorFinding));
 }
@@ -20,6 +25,8 @@ exports.getByPerson = (req, res, next) => {
 exports.getByAuthor = (req, res, next) => {
     Article
         .find({ author: req.params.id })
+        .sort({ createdAt: 'desc' })
+        .populate({ path: 'person', select: { firstName: 1, lastName: 1, avatar: 1 } })
         .then(docs => success(res, docs, docs.length + Constants.RecordsFound))
         .catch(err => error(res, err, Constants.ErrorFinding));
 }

@@ -1,36 +1,17 @@
 import React from 'react'
 
-function Recognition({ greeting }) {
+function Recognition({ article }) {
     return (
-        <section className="relative isolate overflow-hidden bg-white p-6">
-            <div className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.indigo.100),white)] opacity-20" />
-            <div className="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:mr-28 lg:mr-0 xl:mr-16 xl:origin-center" />
-            <div className="mx-auto max-w-2xl lg:max-w-4xl">
-                <img className="mx-auto h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-600.svg" alt="" />
-                <figure className="mt-10">
-                    <blockquote className="text-center font-semibold leading-8 text-gray-900">
-                        <h1 className='text-3xl'>{greeting.fullname}</h1>
-                        <p>
-                            {greeting.message}
-                        </p>
-                    </blockquote>
-                    <figcaption className="mt-10">
-                        <img
-                            className="mx-auto h-10 w-10 rounded-full"
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                            alt=""
-                        />
-                        <div className="mt-4 flex items-center justify-center space-x-3 text-base">
-                            <div className="font-semibold text-gray-900">Judith Black</div>
-                            <svg viewBox="0 0 2 2" width={3} height={3} aria-hidden="true" className="fill-gray-900">
-                                <circle cx={1} cy={1} r={1} />
-                            </svg>
-                            <div className="text-gray-600">CEO of Workcation</div>
-                        </div>
-                    </figcaption>
-                </figure>
-            </div>
-        </section>
+        <div className="w-full bg-cover rounded-md flex flex-col justify-center items-center text-center gap-4" style={{ "backgroundImage": `url(/cards/${article.image})`, height: '400px' }}>
+            <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                {article?.title}
+            </h3>
+            <img src={"/avatars/" + article.personInfo.avatar} alt="" className="h-24 w-24 rounded-full bg-gray-50" />
+            <h3 className="mt-3 text-3xl font-semibold leading-6 text-gray-900 group-hover:text-gray-600 dancing-script">
+                {article?.personInfo?.name}
+            </h3>
+            <p className="mt-5 w-1/2 line-clamp-3 text-sm leading-6 text-gray-900">{article.message}</p>
+        </div>
     )
 }
 
